@@ -9,7 +9,7 @@ public class Patient {
     private Date birth;
     private String address;
     private String phone;
-    private char sex;
+    private String sex;
 
     public Patient(int patientId, String firstName, String lastName, Date birth, String address, String phone, char sex) {
         this.patientId = patientId;
@@ -18,7 +18,7 @@ public class Patient {
         this.birth = birth;
         this.address = address;
         this.phone = phone;
-        this.sex = sex;
+        this.sex = String.valueOf(sex);
     }
 
     public int getPatientId() {
@@ -45,8 +45,8 @@ public class Patient {
         this.lastName = lastName;
     }
 
-    public Date getBirth() {
-        return birth;
+    public java.sql.Date getBirth() {
+        return (java.sql.Date) birth;
     }
 
     public void setBirth(Date birth) {
@@ -69,11 +69,11 @@ public class Patient {
         this.phone = phone;
     }
 
-    public char getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(char sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 }
