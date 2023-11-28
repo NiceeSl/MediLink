@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Запись на прием</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="tel"],
+        input[type="datetime-local"],
+        select {
+            width: 300px;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        select {
+            width: 316px;
+        }
+        button {
+            padding: 10px 24px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<h2>Запись на прием</h2>
+<form action="/appointment" method="post">
+    <label for="firstName">Имя:</label>
+    <input type="text" id="firstName" name="firstName" required>
+
+    <label for="lastName">Фамилия:</label>
+    <input type="text" id="lastName" name="lastName" required>
+
+    <label for="birthDate">Дата рождения:</label>
+    <input type="date" id="birthDate" name="birthDate" required>
+
+    <label for="address">Адрес:</label>
+    <input type="text" id="address" name="address" required>
+
+    <label for="phone">Номер телефона:</label>
+    <input type="tel" id="phone" name="phone" required>
+
+    <label for="sex">Пол:</label>
+    <select id="sex" name="sex" required>
+        <option value="M">М</option>
+        <option value="F">Ж</option>
+    </select>
+
+    <label for="dateTime">Дата и время приема:</label>
+    <input type="datetime-local" id="dateTime" name="dateTime" required>
+
+    <label for="appointmentType">Тип приема:</label>
+    <select id="appointmentType" name="appointmentType" required>
+        <option value="Обследование">Обследование</option>
+        <option value="Операция">Операция</option>
+        <option value="Осмотр">Осмотр</option>
+        <option value="Лечение">Лечение</option>
+        <option value="Консультация">Консультация</option>
+    </select>
+
+    <label for="doctorSpecialization">Специализация врача:</label>
+    <select id="doctorSpecialization" name="doctorSpecialization" required>
+        <option value="Терапевт">Терапевт</option>
+        <option value="Хирург">Хирург</option>
+        <option value="Окулист">Окулист</option>
+        <option value="Невролог">Невролог</option>
+    </select>
+
+    <button type="submit">Записаться</button>
+</form>
+</body>
+</html>

@@ -1,24 +1,49 @@
 package com.example.medilink;
 
+import jakarta.persistence.*;
 import java.sql.Timestamp;
 
+@Entity
+@Table(name = "MedicalAppointment")
 public class MedicalAppointment {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "appointment_id")
     private int appointmentId;
+
+    @Column(name = "patient_id")
+    private int patientId;
+
+    @Column(name = "appointment_date_and_time")
+    @Temporal(TemporalType.TIMESTAMP)
     private Timestamp appointmentDateAndTime;
+
+    @Column(name = "appointment_type")
+    private String appointmentType;
+
+    @Column(name = "appointment_status")
     private String appointmentStatus;
 
-    public MedicalAppointment(int appointmentId, Timestamp appointmentDateAndTime, String appointmentStatus) {
-        this.appointmentId = appointmentId;
+
+    public MedicalAppointment() {
+        // Пустой конструктор нужен для Hibernate
+    }
+
+    public MedicalAppointment(int patientId, Timestamp appointmentDateAndTime, String appointmentStatus) {
+        this.patientId = patientId;
         this.appointmentDateAndTime = appointmentDateAndTime;
         this.appointmentStatus = appointmentStatus;
     }
 
-    public int getAppointmentId() {
-        return appointmentId;
+    // Геттеры и сеттеры для полей
+
+    public int getPatientId() {
+        return patientId;
     }
 
-    public void setAppointmentId(int appointmentId) {
-        this.appointmentId = appointmentId;
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 
     public Timestamp getAppointmentDateAndTime() {
@@ -27,6 +52,14 @@ public class MedicalAppointment {
 
     public void setAppointmentDateAndTime(Timestamp appointmentDateAndTime) {
         this.appointmentDateAndTime = appointmentDateAndTime;
+    }
+
+    public String getAppointmentType() {
+        return appointmentType;
+    }
+
+    public void setAppointmentType(String appointmentType) {
+        this.appointmentType = appointmentType;
     }
 
     public String getAppointmentStatus() {
