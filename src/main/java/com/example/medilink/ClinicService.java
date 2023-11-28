@@ -36,21 +36,19 @@ public class ClinicService {
         patientDAO.addPatient(patient);
     }
 
-    public void scheduleAppointment(int patientId, Timestamp appointmentDateTime, String status) {
-        Patient patient = patientDAO.getPatientById(patientId);
-
-        if (patient == null) {
-            throw new RuntimeException("Patient not found in the database.");
-            // Or handle the situation as per your application's requirements
-        }
-
+    public void scheduleAppointment(int patientId, int doctorId, Timestamp appointmentDateTime, String appointmentType) {
+        // Создание нового объекта приема
         MedicalAppointment appointment = new MedicalAppointment();
         appointment.setPatientId(patientId);
+        appointment.setDoctorId(doctorId);
         appointment.setAppointmentDateAndTime(appointmentDateTime);
-        appointment.setAppointmentStatus(status);
+        appointment.setAppointmentType(appointmentType);
 
+        // Сохранение приема в базе данных
         appointmentDAO.addAppointment(appointment);
+
     }
+
 
     // Other methods...
 }

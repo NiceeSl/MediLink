@@ -37,6 +37,37 @@
     </style>
 </head>
 <body>
+<script>
+    function loadDoctors() {
+        var specializationId = document.getElementById('specializationSelect').value;
+        fetch('/doctors/' + specializationId)
+            .then(response => response.json())
+            .then(doctors => {
+                var doctorSelect = document.getElementById('doctorSelect');
+                doctorSelect.innerHTML = '';
+                doctors.forEach(doctor => {
+                    var option = new Option(doctor.firstName + ' ' + doctor.lastName, doctor.doctorId);
+                    doctorSelect.add(option);
+                });
+            });
+    }
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/api/specializations')
+            .then(response => response.json())
+            .then(specializations => {
+                var select = document.getElementById('specializationSelect');
+                specializations.forEach(function(specialization) {
+                    var option = document.createElement('option');
+                    option.value = specialization.specializationId;
+                    option.textContent = specialization.specializationName;
+                    select.appendChild(option);
+                });
+            });
+    });
+</script>
 <h2>Запись на прием</h2>
 <form action="/appointment" method="post">
     <label for="firstName">Имя:</label>
@@ -72,13 +103,16 @@
         <option value="Консультация">Консультация</option>
     </select>
 
-    <label for="doctorSpecialization">Специализация врача:</label>
-    <select id="doctorSpecialization" name="doctorSpecialization" required>
-        <option value="Терапевт">Терапевт</option>
-        <option value="Хирург">Хирург</option>
-        <option value="Окулист">Окулист</option>
-        <option value="Невролог">Невролог</option>
+    <select id="specializationSelect" onchange="loadDoctors()">
+        <option value="">Выберите специализацию</option>
+        <!-- Опции будут добавлены динамически -->
     </select>
+
+    <label for="doctorSelect">Выберите врача:</label>
+    <select id="doctorSelect" name="doctor" onchange="loadDoctors()">
+        <!-- Динамически заполненные опции -->
+    </select>
+
 
     <button type="submit">Записаться</button>
 </form>

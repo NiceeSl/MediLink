@@ -19,7 +19,8 @@ public class AppointmentDAO {
 
     public List<MedicalAppointment> getAppointmentsForPatient(int patientId) {
         try {
-            TypedQuery<MedicalAppointment> query = entityManager.createQuery("FROM MedicalAppointment WHERE patient_id = :patientId", MedicalAppointment.class);
+            TypedQuery<MedicalAppointment> query = entityManager.createQuery(
+                    "FROM MedicalAppointment WHERE patientId = :patientId", MedicalAppointment.class);
             query.setParameter("patientId", patientId);
             return query.getResultList();
         } catch (Exception e) {

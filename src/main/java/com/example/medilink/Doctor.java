@@ -1,16 +1,45 @@
 package com.example.medilink;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Doctor")
 public class Doctor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "doctor_id")
     private int doctorId;
+
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
-    private String specialization;
+
+    @ManyToOne
+    @JoinColumn(name = "specialization", referencedColumnName = "specialization_id")
+    @JsonBackReference
+    private Specialization specialization;
+
+    @Column(name = "phone")
     private String phone;
+
+    @Column(name = "address")
     private String address;
-    private String department;
+
+    @Column(name = "department")
+    private int department;
+
+    @Column(name = "salary")
     private int salary;
 
-    public Doctor(int doctorId, String firstName, String lastName, String specialization, String phone, String address, String department, int salary) {
+    // Конструкторы, геттеры и сеттеры
+
+    public Doctor() {
+    }
+
+    public Doctor(int doctorId, String firstName, String lastName, Specialization specialization, String phone, String address, int department, int salary) {
         this.doctorId = doctorId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -20,6 +49,8 @@ public class Doctor {
         this.department = department;
         this.salary = salary;
     }
+
+    // Геттеры и сеттеры для всех полей
 
     public int getDoctorId() {
         return doctorId;
@@ -45,11 +76,11 @@ public class Doctor {
         this.lastName = lastName;
     }
 
-    public String getSpecialization() {
+    public Specialization getSpecialization() {
         return specialization;
     }
 
-    public void setSpecialization(String specialization) {
+    public void setSpecialization(Specialization specialization) {
         this.specialization = specialization;
     }
 
@@ -69,11 +100,11 @@ public class Doctor {
         this.address = address;
     }
 
-    public String getDepartment() {
+    public int getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(int department) {
         this.department = department;
     }
 

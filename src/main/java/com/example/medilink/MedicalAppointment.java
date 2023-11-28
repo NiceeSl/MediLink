@@ -15,6 +15,9 @@ public class MedicalAppointment {
     @Column(name = "patient_id")
     private int patientId;
 
+    @Column(name = "doctor_id")
+    private int doctorId;
+
     @Column(name = "appointment_date_and_time")
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp appointmentDateAndTime;
@@ -37,6 +40,22 @@ public class MedicalAppointment {
     }
 
     // Геттеры и сеттеры для полей
+
+    public int getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(int appointmentId) {
+        this.appointmentId = appointmentId;
+    }
+
+    public int getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
+    }
 
     public int getPatientId() {
         return patientId;
